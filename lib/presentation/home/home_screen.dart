@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:machine_task_lilac_infotech/core/network/api_service.dart';
+import 'package:machine_task_lilac_infotech/data/models/movie_models.dart';
 import 'package:machine_task_lilac_infotech/presentation/widgets/bottom_navigation_widget.dart';
 import 'package:machine_task_lilac_infotech/presentation/widgets/home_screen_widgets.dart';
 
@@ -11,44 +13,44 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // final ApiService _apiService = ApiService();
-  // final ScrollController _scrollController = ScrollController();
+  final ApiService _apiService = ApiService();
+  final ScrollController _scrollController = ScrollController();
 
-  // List<MovieModels> movies = [];
-  // // late Future<List<MovieModels>> _movies;
-  // int currentPage = 1;
-  // bool isLoading = false;
-  // bool hasMore = true;
+  List<MovieModels> movies = [];
+  // late Future<List<MovieModels>> _movies;
+  int currentPage = 1;
+  bool isLoading = false;
+  bool hasMore = true;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   fetchMovies();
+  @override
+  void initState() {
+    super.initState();
+    fetchMovies();
 
-  //   _scrollController.addListener(() {
-  //     if (_scrollController.position.pixels >=
-  //             _scrollController.position.maxScrollExtent - 100 &&
-  //         !isLoading &&
-  //         hasMore) {
-  //       fetchMovies();
-  //     }
-  //   });
-  // }
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels >=
+              _scrollController.position.maxScrollExtent - 100 &&
+          !isLoading &&
+          hasMore) {
+        fetchMovies();
+      }
+    });
+  }
 
-  // Future<void> fetchMovies() async {
-  //   setState(() => isLoading = true);
+  Future<void> fetchMovies() async {
+    setState(() => isLoading = true);
 
-  //   final newMovies = await _apiService.fetchMovie(currentPage);
+    final newMovies = await _apiService.fetchMovie(currentPage);
 
-  //   if (newMovies.isEmpty) {
-  //     hasMore = false;
-  //   } else {
-  //     currentPage++;
-  //     movies.addAll(newMovies);
-  //   }
+    if (newMovies.isEmpty) {
+      hasMore = false;
+    } else {
+      currentPage++;
+      movies.addAll(newMovies);
+    }
 
-  //   setState(() => isLoading = false);
-  // }
+    setState(() => isLoading = false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -415,55 +417,55 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
               /// Trending Movie Card
-              // Positioned(
-              //   top: 665,
-              //   left: 0,
-              //   right: 0,
-              //   child: SizedBox(
-              //     height: 95,
-              //     child: NotificationListener<ScrollNotification>(
-              //       onNotification: (scrollInfo) {
-              //         if (!isLoading &&
-              //             hasMore &&
-              //             scrollInfo.metrics.pixels >=
-              //                 scrollInfo.metrics.maxScrollExtent - 100) {
-              //           fetchMovies();
-              //         }
-              //         return false;
-              //       },
-              //       child: ListView.builder(
-              //         scrollDirection: Axis.horizontal,
-              //         padding: const EdgeInsets.only(left: 16),
-              //         itemCount: isLoading ? 2 : movies.length,
-              //         itemBuilder: (context, index) {
-              //           return Padding(
-              //             padding: const EdgeInsets.only(right: 12),
-              //             child:
-              //                 isLoading
-              //                     ? const TrendingMovieLoadingCard()
-              //                     : GestureDetector(
-              //                       onTap: () {
-              //                         Navigator.push(
-              //                           context,
-              //                           MaterialPageRoute(
-              //                             builder:
-              //                                 (_) => DetailsScreen(
-              //                                   imdbID: movies[index].imdbID,
-              //                                 ),
-              //                           ),
-              //                         );
-              //                       },
-              //                       child: TrendingMovieCard(
-              //                         poster: movies[index].poster,
-              //                         title: movies[index].title,
-              //                       ),
-              //                     ),
-              //           );
-              //         },
-              //       ),
-              //     ),
-              //   ),
-              // ),
+              Positioned(
+                top: 665,
+                left: 0,
+                right: 0,
+                child: SizedBox(
+                  height: 95,
+                  child: NotificationListener<ScrollNotification>(
+                    onNotification: (scrollInfo) {
+                      if (!isLoading &&
+                          hasMore &&
+                          scrollInfo.metrics.pixels >=
+                              scrollInfo.metrics.maxScrollExtent - 100) {
+                        fetchMovies();
+                      }
+                      return false;
+                    },
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.only(left: 16),
+                      itemCount: isLoading ? 2 : movies.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 12),
+                          child:
+                              isLoading
+                                  ? const TrendingMovieLoadingCard()
+                                  : GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder:
+                                              (_) => DetailsScreen(
+                                                imdbID: movies[index].imdbID,
+                                              ),
+                                        ),
+                                      );
+                                    },
+                                    child: TrendingMovieCard(
+                                      poster: movies[index].poster,
+                                      title: movies[index].title,
+                                    ),
+                                  ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ),
               Positioned(
                 top: 792,
                 left: 16,
@@ -471,46 +473,46 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
               /// Movie Poster Card (126x187)
-              // Positioned(
-              //   top: 830,
-              //   left: 0,
-              //   right: 0,
-              //   child: SizedBox(
-              //     height: 187,
-              //     child: ListView.builder(
-              //       controller: _scrollController,
-              //       scrollDirection: Axis.horizontal,
-              //       padding: const EdgeInsets.only(left: 16),
-              //       itemCount: movies.length + (isLoading ? 1 : 0),
-              //       itemBuilder: (context, index) {
-              //         if (index < movies.length) {
-              //           return Padding(
-              //             padding: const EdgeInsets.only(right: 16),
-              //             child: GestureDetector(
-              //               onTap: () {
-              //                 Navigator.push(
-              //                   context,
-              //                   MaterialPageRoute(
-              //                     builder:
-              //                         (_) => DetailsScreen(
-              //                           imdbID: movies[index].imdbID,
-              //                         ),
-              //                   ),
-              //                 );
-              //               },
-              //               child: UpcomingCard(poster: movies[index].poster),
-              //             ),
-              //           );
-              //         } else {
-              //           return const SizedBox(
-              //             width: 80,
-              //             child: Center(child: CircularProgressIndicator()),
-              //           );
-              //         }
-              //       },
-              //     ),
-              //   ),
-              // ),
+              Positioned(
+                top: 830,
+                left: 0,
+                right: 0,
+                child: SizedBox(
+                  height: 187,
+                  child: ListView.builder(
+                    controller: _scrollController,
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.only(left: 16),
+                    itemCount: movies.length + (isLoading ? 1 : 0),
+                    itemBuilder: (context, index) {
+                      if (index < movies.length) {
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 16),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (_) => DetailsScreen(
+                                        imdbID: movies[index].imdbID,
+                                      ),
+                                ),
+                              );
+                            },
+                            child: UpcomingCard(poster: movies[index].poster),
+                          ),
+                        );
+                      } else {
+                        return const SizedBox(
+                          width: 80,
+                          child: Center(child: CircularProgressIndicator()),
+                        );
+                      }
+                    },
+                  ),
+                ),
+              ),
             ],
           ),
         ),

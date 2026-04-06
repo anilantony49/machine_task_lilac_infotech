@@ -324,25 +324,25 @@ class SidePoster extends StatelessWidget {
   }
 }
 
-// class TrendingMovieLoadingCard extends StatelessWidget {
-//   const TrendingMovieLoadingCard({super.key});
+class TrendingMovieLoadingCard extends StatelessWidget {
+  const TrendingMovieLoadingCard({super.key});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       width: 169,
-//       height: 95,
-//       decoration: BoxDecoration(
-//         borderRadius: BorderRadius.circular(13),
-//         border: Border.all(color: const Color(0xFF94061C), width: 0.5),
-//       ),
-//       child: const Center(
-//         child: SizedBox(
-//           width: 20,
-//           height: 20,
-//           child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
-//         ),
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 169,
+      height: 95,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(13),
+        border: Border.all(color: const Color(0xFF94061C), width: 0.5),
+      ),
+      child: const Center(
+        child: SizedBox(
+          width: 20,
+          height: 20,
+          child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+        ),
+      ),
+    );
+  }
+}
