@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
- 
+import 'package:machine_task_lilac_infotech/data/models/movie_details_models.dart';
+
 class TimeSlotWidget extends StatelessWidget {
   final String time;
   final bool isSelected;
@@ -120,84 +121,84 @@ class DateDivider extends StatelessWidget {
   }
 }
 
-// class GenreChip extends StatelessWidget {
-//   final Future<MovieDetailsModels> future;
-//   final String iconPath;
-//   final bool isFirst; // true = first genre, false = last genre
+class GenreChip extends StatelessWidget {
+  final Future<MovieDetailsModels> future;
+  final String iconPath;
+  final bool isFirst; // true = first genre, false = last genre
 
-//   const GenreChip({
-//     super.key,
-//     required this.future,
-//     required this.iconPath,
-//     required this.isFirst,
-//   });
+  const GenreChip({
+    super.key,
+    required this.future,
+    required this.iconPath,
+    required this.isFirst,
+  });
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return ConstrainedBox(
-//       constraints: const BoxConstraints(maxWidth: 110, maxHeight: 28),
-//       child: Container(
-//         height: 28,
-//         padding: const EdgeInsets.symmetric(horizontal: 8),
-//         decoration: BoxDecoration(
-//           color: const Color(0x1FFFFFFF),
-//           borderRadius: BorderRadius.circular(100),
-//           border: Border.all(color: const Color(0x1AFFFFFF), width: 1),
-//         ),
-//         child: Row(
-//           mainAxisSize: MainAxisSize.min,
-//           children: [
-//             Image.asset(iconPath, height: 14),
-//             const SizedBox(width: 6),
-//             FutureBuilder<MovieDetailsModels>(
-//               future: future,
-//               builder: (context, snapshot) {
-//                 if (snapshot.connectionState == ConnectionState.waiting) {
-//                   return const SizedBox(
-//                     width: 14,
-//                     height: 14,
-//                     child: CircularProgressIndicator(
-//                       strokeWidth: 2,
-//                       color: Colors.white,
-//                     ),
-//                   );
-//                 }
+  @override
+  Widget build(BuildContext context) {
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 110, maxHeight: 28),
+      child: Container(
+        height: 28,
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        decoration: BoxDecoration(
+          color: const Color(0x1FFFFFFF),
+          borderRadius: BorderRadius.circular(100),
+          border: Border.all(color: const Color(0x1AFFFFFF), width: 1),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(iconPath, height: 14),
+            const SizedBox(width: 6),
+            FutureBuilder<MovieDetailsModels>(
+              future: future,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const SizedBox(
+                    width: 14,
+                    height: 14,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      color: Colors.white,
+                    ),
+                  );
+                }
 
-//                 if (!snapshot.hasData || snapshot.hasError) {
-//                   return const SizedBox();
-//                 }
+                if (!snapshot.hasData || snapshot.hasError) {
+                  return const SizedBox();
+                }
 
-//                 final genres = snapshot.data!.genre.split(',');
+                final genres = snapshot.data!.genre.split(',');
 
-//                 final text = isFirst ? genres.first.trim() : genres.last.trim();
+                final text = isFirst ? genres.first.trim() : genres.last.trim();
 
-//                 return Text(
-//                   text,
-//                   style: GoogleFonts.spaceGrotesk(
-//                     fontSize: 14,
-//                     fontWeight: FontWeight.w400,
-//                     height: .5,
-//                     color: Colors.white,
-//                     letterSpacing: 0,
-//                   ),
-//                 );
-//               },
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+                return Text(
+                  text,
+                  style: GoogleFonts.spaceGrotesk(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    height: .5,
+                    color: Colors.white,
+                    letterSpacing: 0,
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 class InfoChip extends StatelessWidget {
-  // final Future<MovieDetailsModels> future;
-  // final String Function(MovieDetailsModels) valueExtractor;
+  final Future<MovieDetailsModels> future;
+  final String Function(MovieDetailsModels) valueExtractor;
 
   const InfoChip({
     super.key,
-    // required this.future,
-    // required this.valueExtractor,
+    required this.future,
+    required this.valueExtractor,
   });
 
   @override
@@ -210,39 +211,39 @@ class InfoChip extends StatelessWidget {
           borderRadius: BorderRadius.circular(6),
           border: Border.all(color: const Color(0x1AFFFFFF), width: 0.5),
         ),
-        // child: FutureBuilder<MovieDetailsModels>(
-        //   future: future,
-        //   builder: (context, snapshot) {
-        //     if (snapshot.connectionState == ConnectionState.waiting) {
-        //       return const SizedBox(
-        //         width: 14,
-        //         height: 14,
-        //         child: CircularProgressIndicator(
-        //           strokeWidth: 2,
-        //           color: Colors.white,
-        //         ),
-        //       );
-        //     }
+        child: FutureBuilder<MovieDetailsModels>(
+          future: future,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const SizedBox(
+                width: 14,
+                height: 14,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  color: Colors.white,
+                ),
+              );
+            }
 
-        //     if (!snapshot.hasData || snapshot.hasError) {
-        //       return const SizedBox();
-        //     }
+            if (!snapshot.hasData || snapshot.hasError) {
+              return const SizedBox();
+            }
 
-        //     final value = valueExtractor(snapshot.data!);
+            final value = valueExtractor(snapshot.data!);
 
-        //     return Text(
-        //       value,
-        //       overflow: TextOverflow.ellipsis,
-        //       style: GoogleFonts.spaceGrotesk(
-        //         fontSize: 14,
-        //         fontWeight: FontWeight.w400,
-        //         height: .6,
-        //         letterSpacing: 0,
-        //         color: const Color(0xB2FFFFFF),
-        //       ),
-        //     );
-        //   },
-        // ),
+            return Text(
+              value,
+              overflow: TextOverflow.ellipsis,
+              style: GoogleFonts.spaceGrotesk(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                height: .6,
+                letterSpacing: 0,
+                color: const Color(0xB2FFFFFF),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

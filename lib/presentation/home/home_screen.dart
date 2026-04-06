@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:machine_task_lilac_infotech/core/network/api_service.dart';
 import 'package:machine_task_lilac_infotech/data/models/movie_models.dart';
+import 'package:machine_task_lilac_infotech/presentation/movie_details_screen/details_screen.dart';
 import 'package:machine_task_lilac_infotech/presentation/widgets/bottom_navigation_widget.dart';
 import 'package:machine_task_lilac_infotech/presentation/widgets/home_screen_widgets.dart';
 
