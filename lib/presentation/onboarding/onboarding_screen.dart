@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:machine_task_lilac_infotech/presentation/home/home_screen.dart';
 import 'package:machine_task_lilac_infotech/presentation/widgets/round_button_widget.dart';
 
 class OnboardingScreen extends StatelessWidget {

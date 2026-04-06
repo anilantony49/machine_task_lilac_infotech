@@ -185,114 +185,114 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    // GenrePill(text: "Drama"),
-                    // SizedBox(width: 8),
-                    // GenrePill(text: "12+"),
-                    // SizedBox(width: 8),
-                    // GenrePill(text: "Drama"),
+                    GenrePill(text: "Drama"),
+                    SizedBox(width: 8),
+                    GenrePill(text: "12+"),
+                    SizedBox(width: 8),
+                    GenrePill(text: "Drama"),
                   ],
                 ),
               ),
 
               /// Movie Card Container
-              // Positioned(
-              //   top: 412,
-              //   left: -9,
-              //   child: SidePoster(
-              //     imagePath: "assets/images/movie_poster_1.png",
-              //   ),
-              // ),
+              Positioned(
+                top: 412,
+                left: -9,
+                child: SidePoster(
+                  imagePath: "assets/images/movie_poster_1.png",
+                ),
+              ),
 
               /// Large Movie Card With Shadow
-              // Positioned(
-              //   top: 377,
-              //   left: 135.03,
-              //   child: ClipRRect(
-              //     borderRadius: BorderRadius.circular(14.38),
+              Positioned(
+                top: 377,
+                left: 135.03,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(14.38),
 
-              //     child: Stack(
-              //       children: [
-              //         /// Poster Image
-              //         Image.asset(
-              //           "assets/images/movie_poster_2.png",
-              //           width: 133,
-              //           height: 192,
-              //           fit: BoxFit.cover,
-              //           alignment: const Alignment(-0.3, -1),
-              //         ),
+                  child: Stack(
+                    children: [
+                      /// Poster Image
+                      Image.asset(
+                        "assets/images/movie_poster_2.png",
+                        width: 133,
+                        height: 192,
+                        fit: BoxFit.cover,
+                        alignment: const Alignment(-0.3, -1),
+                      ),
 
-              //         /// Gradient Overlay (133x102 at top: 90)
-              //         Positioned(
-              //           top: 90,
-              //           left: -0.03,
-              //           child: Container(
-              //             width: 133,
-              //             height: 102,
-              //             decoration: const BoxDecoration(
-              //               gradient: LinearGradient(
-              //                 begin: Alignment.topCenter, // 180deg
-              //                 end: Alignment.bottomCenter,
-              //                 colors: [Color(0x00000000), Color(0xFF000000)],
-              //               ),
-              //             ),
-              //             child: Stack(
-              //               children: [
-              //                 Positioned(
-              //                   top: 66,
-              //                   left: 12,
-              //                   child: Container(
-              //                     width: 109,
-              //                     height: 24,
-              //                     decoration: BoxDecoration(
-              //                       color: const Color(0x91000000), // #00000091
-              //                       borderRadius: BorderRadius.circular(6),
-              //                       border: Border.all(
-              //                         color: const Color(
-              //                           0x30FFFFFF,
-              //                         ), // #FFFFFF30
-              //                         width: 0.5,
-              //                       ),
-              //                     ),
-              //                     child: Stack(
-              //                       children: [
-              //                         Positioned(
-              //                           top: 7,
-              //                           left: 22,
-              //                           child: Text(
-              //                             "Book Now",
-              //                             style: GoogleFonts.spaceGrotesk(
-              //                               fontSize: 14,
-              //                               fontWeight:
-              //                                   FontWeight.w400, // Regular
-              //                               height:
-              //                                   10 /
-              //                                   14, // 1.714 exact line height
-              //                               letterSpacing: 0,
-              //                               color: const Color(0xFFFFFFFF),
-              //                             ),
-              //                           ),
-              //                         ),
-              //                       ],
-              //                     ),
-              //                   ),
-              //                 ),
-              //               ],
-              //             ),
-              //           ),
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // ),
+                      /// Gradient Overlay (133x102 at top: 90)
+                      Positioned(
+                        top: 90,
+                        left: -0.03,
+                        child: Container(
+                          width: 133,
+                          height: 102,
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter, // 180deg
+                              end: Alignment.bottomCenter,
+                              colors: [Color(0x00000000), Color(0xFF000000)],
+                            ),
+                          ),
+                          child: Stack(
+                            children: [
+                              Positioned(
+                                top: 66,
+                                left: 12,
+                                child: Container(
+                                  width: 109,
+                                  height: 24,
+                                  decoration: BoxDecoration(
+                                    color: const Color(0x91000000), // #00000091
+                                    borderRadius: BorderRadius.circular(6),
+                                    border: Border.all(
+                                      color: const Color(
+                                        0x30FFFFFF,
+                                      ), // #FFFFFF30
+                                      width: 0.5,
+                                    ),
+                                  ),
+                                  child: Stack(
+                                    children: [
+                                      Positioned(
+                                        top: 7,
+                                        left: 22,
+                                        child: Text(
+                                          "Book Now",
+                                          style: GoogleFonts.spaceGrotesk(
+                                            fontSize: 14,
+                                            fontWeight:
+                                                FontWeight.w400, // Regular
+                                            height:
+                                                10 /
+                                                14, // 1.714 exact line height
+                                            letterSpacing: 0,
+                                            color: const Color(0xFFFFFFFF),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
 
-              // Positioned(
-              //   top: 412,
-              //   left: 292,
+              Positioned(
+                top: 412,
+                left: 292,
 
-              //   child: SidePoster(
-              //     imagePath: "assets/images/movie_poster_3.png",
-              //   ),
-              // ),
+                child: SidePoster(
+                  imagePath: "assets/images/movie_poster_3.png",
+                ),
+              ),
               Positioned(
                 top: 377, // same top reference
                 left: 0,
@@ -414,7 +414,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: const SectionTitle(title: "Trending Movie Near You"),
               ),
 
-              /// Trending Movie Card (169x94.93)
+              /// Trending Movie Card
               // Positioned(
               //   top: 665,
               //   left: 0,
