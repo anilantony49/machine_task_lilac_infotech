@@ -66,6 +66,7 @@ class OnboardingScreen extends StatelessWidget {
             title: "NEXT",
             onTap: () {
               Future.delayed(const Duration(seconds: 2), () {
+                if (!context.mounted) return;
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (_) => const HomeScreen()),

@@ -18,7 +18,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _scrollController = ScrollController();
 
   List<MovieModels> movies = [];
-  // late Future<List<MovieModels>> _movies;
   int currentPage = 1;
   bool isLoading = false;
   bool hasMore = true;
@@ -38,10 +37,19 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   Future<void> fetchMovies() async {
+    if (!mounted) return;
     setState(() => isLoading = true);
 
     final newMovies = await _apiService.fetchMovie(currentPage);
+
+    if (!mounted) return;
 
     if (newMovies.isEmpty) {
       hasMore = false;
@@ -58,16 +66,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          // width: double.infinity,
           height: 1118,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              begin: Alignment.topCenter, // 180deg
+              begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [
-                Color(0xFF02021B), // #02021B
-                Color(0xFF590001), // #590001
-              ],
+              colors: [Color(0xFF02021B), Color(0xFF590001)],
             ),
           ),
           child: Stack(
@@ -76,15 +80,13 @@ class _HomeScreenState extends State<HomeScreen> {
               Positioned(
                 top: -5,
                 left: -83,
-
                 child: SizedBox(
                   width: 568,
                   height: 582,
                   child: Image.asset(
-                    "assets/images/home_screen_bg_image.png", // rename properly
+                    "assets/images/home_screen_bg_image.png",
                     fit: BoxFit.cover,
-                    // alignment: Alignment.center,
-                    alignment: Alignment(1, -1.01),
+                    alignment: const Alignment(1.0, -1.01),
                   ),
                 ),
               ),
@@ -140,20 +142,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 433,
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(
-                      begin: Alignment.topCenter, // 180deg
+                      begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      stops: [
-                        0.0,
-                        0.9038, // 90.38%
-                      ],
-                      colors: [
-                        Color(0x0002021B), // transparent
-                        Color(0xFF31010D), // #31010D
-                      ],
+                      stops: [0.0, 0.9038],
+                      colors: [Color(0x0002021B), Color(0xFF31010D)],
                     ),
                   ),
                 ),
               ),
+
               // Play arrow button
               Positioned(
                 top: 198,
@@ -179,15 +176,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
 
-              /// Rounded Glass Small Container
-              /// Small Pill Container (63x24)
-              Positioned(
+              /// Rounded Glass Small Container (Genre Pills)
+              const Positioned(
                 top: 321,
                 left: 0,
                 right: 0,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     GenrePill(text: "Drama"),
                     SizedBox(width: 8),
                     GenrePill(text: "12+"),
@@ -197,107 +193,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
 
-              /// Movie Card Container
-              Positioned(
-                top: 412,
-                left: -9,
-                child: SidePoster(
-                  imagePath: "assets/images/movie_poster_1.png",
-                ),
-              ),
-
-              /// Large Movie Card With Shadow
+              /// Movie Card Container Stack (Posters)
               Positioned(
                 top: 377,
-                left: 135.03,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(14.38),
-
-                  child: Stack(
-                    children: [
-                      /// Poster Image
-                      Image.asset(
-                        "assets/images/movie_poster_2.png",
-                        width: 133,
-                        height: 192,
-                        fit: BoxFit.cover,
-                        alignment: const Alignment(-0.3, -1),
-                      ),
-
-                      /// Gradient Overlay (133x102 at top: 90)
-                      Positioned(
-                        top: 90,
-                        left: -0.03,
-                        child: Container(
-                          width: 133,
-                          height: 102,
-                          decoration: const BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topCenter, // 180deg
-                              end: Alignment.bottomCenter,
-                              colors: [Color(0x00000000), Color(0xFF000000)],
-                            ),
-                          ),
-                          child: Stack(
-                            children: [
-                              Positioned(
-                                top: 66,
-                                left: 12,
-                                child: Container(
-                                  width: 109,
-                                  height: 24,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0x91000000), // #00000091
-                                    borderRadius: BorderRadius.circular(6),
-                                    border: Border.all(
-                                      color: const Color(
-                                        0x30FFFFFF,
-                                      ), // #FFFFFF30
-                                      width: 0.5,
-                                    ),
-                                  ),
-                                  child: Stack(
-                                    children: [
-                                      Positioned(
-                                        top: 7,
-                                        left: 22,
-                                        child: Text(
-                                          "Book Now",
-                                          style: GoogleFonts.spaceGrotesk(
-                                            fontSize: 14,
-                                            fontWeight:
-                                                FontWeight.w400, // Regular
-                                            height:
-                                                10 /
-                                                14, // 1.714 exact line height
-                                            letterSpacing: 0,
-                                            color: const Color(0xFFFFFFFF),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-              Positioned(
-                top: 412,
-                left: 292,
-
-                child: SidePoster(
-                  imagePath: "assets/images/movie_poster_3.png",
-                ),
-              ),
-              Positioned(
-                top: 377, // same top reference
                 left: 0,
                 right: 0,
                 child: SizedBox(
@@ -306,8 +204,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     alignment: Alignment.topCenter,
                     children: [
                       /// Left Poster
-                      Positioned(
-                        top: 35, // slightly lower than center poster
+                      const Positioned(
+                        top: 35,
                         left: -3,
                         child: SidePoster(
                           imagePath: "assets/images/movie_poster_1.png",
@@ -333,7 +231,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 height: 102,
                                 decoration: const BoxDecoration(
                                   gradient: LinearGradient(
-                                    begin: Alignment.topCenter, // 180deg
+                                    begin: Alignment.topCenter,
                                     end: Alignment.bottomCenter,
                                     colors: [
                                       Color(0x00000000),
@@ -350,16 +248,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                         width: 109,
                                         height: 24,
                                         decoration: BoxDecoration(
-                                          color: const Color(
-                                            0x91000000,
-                                          ), // #00000091
+                                          color: const Color(0x91000000),
                                           borderRadius: BorderRadius.circular(
                                             6,
                                           ),
                                           border: Border.all(
-                                            color: const Color(
-                                              0x30FFFFFF,
-                                            ), // #FFFFFF30
+                                            color: const Color(0x30FFFFFF),
                                             width: 0.5,
                                           ),
                                         ),
@@ -372,12 +266,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 "Book Now",
                                                 style: GoogleFonts.spaceGrotesk(
                                                   fontSize: 14,
-                                                  fontWeight:
-                                                      FontWeight
-                                                          .w400, // Regular
-                                                  height:
-                                                      10 /
-                                                      14, // 1.714 exact line height
+                                                  fontWeight: FontWeight.w400,
+                                                  height: 10 / 14,
                                                   letterSpacing: 0,
                                                   color: const Color(
                                                     0xFFFFFFFF,
@@ -398,8 +288,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
 
                       /// Right Poster
-                      Positioned(
-                        top: 35, // match left poster
+                      const Positioned(
+                        top: 35,
                         right: -4,
                         child: SidePoster(
                           imagePath: "assets/images/movie_poster_3.png",
@@ -411,13 +301,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
               /// Trending Movie Title
-              Positioned(
+              const Positioned(
                 top: 627,
                 left: 16,
-                child: const SectionTitle(title: "Trending Movie Near You"),
+                child: SectionTitle(title: "Trending Movie Near You"),
               ),
 
-              /// Trending Movie Card
+              /// Trending Movie Card Horizontal List
               Positioned(
                 top: 665,
                 left: 0,
@@ -437,43 +327,59 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       padding: const EdgeInsets.only(left: 16),
-                      itemCount: isLoading ? 2 : movies.length,
+                      itemCount:
+                          (isLoading && movies.isEmpty)
+                              ? 2
+                              : movies.length + (isLoading ? 1 : 0),
                       itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 12),
-                          child:
-                              isLoading
-                                  ? const TrendingMovieLoadingCard()
-                                  : GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder:
-                                              (_) => DetailsScreen(
-                                                imdbID: movies[index].imdbID,
-                                              ),
+                        if (isLoading && movies.isEmpty) {
+                          return const Padding(
+                            padding: EdgeInsets.only(right: 12),
+                            child: TrendingMovieLoadingCard(),
+                          );
+                        }
+
+                        if (index < movies.length) {
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 12),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder:
+                                        (_) => DetailsScreen(
+                                          imdbID: movies[index].imdbID,
                                         ),
-                                      );
-                                    },
-                                    child: TrendingMovieCard(
-                                      poster: movies[index].poster,
-                                      title: movies[index].title,
-                                    ),
                                   ),
-                        );
+                                );
+                              },
+                              child: TrendingMovieCard(
+                                poster: movies[index].poster,
+                                title: movies[index].title,
+                              ),
+                            ),
+                          );
+                        } else {
+                          return const Padding(
+                            padding: EdgeInsets.only(right: 12),
+                            child: TrendingMovieLoadingCard(),
+                          );
+                        }
                       },
                     ),
                   ),
                 ),
               ),
-              Positioned(
+
+              /// Upcoming Title
+              const Positioned(
                 top: 792,
                 left: 16,
-                child: const SectionTitle(title: "Upcoming"),
+                child: SectionTitle(title: "Upcoming"),
               ),
 
-              /// Movie Poster Card (126x187)
+              /// Upcoming Movie Horizontal List
               Positioned(
                 top: 830,
                 left: 0,
@@ -518,7 +424,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationWidget(),
+      bottomNavigationBar: const BottomNavigationWidget(),
     );
   }
 }

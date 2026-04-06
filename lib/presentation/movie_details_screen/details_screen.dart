@@ -210,7 +210,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       return const SizedBox();
                     }
 
-                    // ✅ store title
+                    //  store title
                     movieTitle = snapshot.data!.title;
 
                     return Text(
