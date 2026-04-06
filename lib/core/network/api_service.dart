@@ -20,11 +20,11 @@ class ApiService {
     try {
       final response = await _dio.get(
         "${ApiConstants.baseUrl}/?apikey=${EnvConfig.apiKey}&s=avengers&page=$page",
-        queryParameters: {
-          "apikey": EnvConfig.apiKey,
-          "s": "avengers",
-          "page": 1,
-        },
+        // queryParameters: {
+        //   "apikey": EnvConfig.apiKey,
+        //   "s": "avengers",
+        //   "page": 1,
+        // },
       );
 
       if (response.statusCode == 200) {

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:machine_task_lilac_infotech/core/network/api_service.dart';
 import 'package:machine_task_lilac_infotech/data/models/movie_details_models.dart';
+import 'package:machine_task_lilac_infotech/presentation/booking_screen/movie_booking_screen.dart';
 import 'package:machine_task_lilac_infotech/presentation/widgets/details_screen_widget.dart';
 
 class DetailsScreen extends StatefulWidget {
