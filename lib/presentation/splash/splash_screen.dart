@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:machine_task_lilac_infotech/presentation/onboarding/onboarding_screen.dart';
+import 'package:machine_task_lilac_infotech/presentation/widgets/round_button_widget.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -118,15 +120,15 @@ class _SplashScreenState extends State<SplashScreen>
             ),
 
             /// NEXT Button
-            // PrimaryRoundedButton(
-            //   title: "NEXT",
-            //   onTap: () {
-            //     Navigator.pushReplacement(
-            //       context,
-            //       MaterialPageRoute(builder: (_) => const OnboardingScreen()),
-            //     );
-            //   },
-            // ),
+            PrimaryRoundedButton(
+              title: "NEXT",
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (_) => const OnboardingScreen()),
+                );
+              },
+            ),
           ],
         ),
       ),
